@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bayesoptim"
+version = "0.1.0"
+description = "General-purpose Bayesian Optimisation with Gaussian Processes for sequential experiment design"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [
+    { name = "Subaru Ken Muroi", email = "subarumuroi@gmail.com" }
+]
+keywords = [
+    "bayesian optimisation", "gaussian process", "experiment design",
+    "active learning", "sequential optimisation", "machine learning"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0",
+    "botorch>=0.9",
+    "gpytorch>=1.10",
+    "numpy>=1.24",
+    "pandas>=1.5",
+    "matplotlib>=3.6",
+    "scipy>=1.10",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "black", "ruff", "jupyter"]
+notebooks = ["jupyter", "ipykernel", "seaborn"]
+
+[project.scripts]
+bayesoptim = "bayesoptim.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/subarumuroi/BayesOptim"
+Repository = "https://github.com/subarumuroi/BayesOptim"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bayesoptim*"]
