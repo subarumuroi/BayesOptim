@@ -262,7 +262,7 @@ BayesOptim/
 
 ## License
 
-MIT © Subaru Ken Muroi
+Apache 2.0 © Subaru Ken Muroi
 
 ---
 
