@@ -1,0 +1,77 @@
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+
+# Example high-dimensional experiment matrix
+X = np.random.rand(30, 6)  # 30 experiments, 6 variables
+y = np.sin(X[:,0]*5) + np.cos(X[:,1]*4)
+
+# PCA projection
+pca = PCA(n_components=2)
+X_proj = pca.fit_transform(X)
+
+plt.figure(figsize=(6,5))
+
+sc = plt.scatter(
+    X_proj[:,0],
+    X_proj[:,1],
+    c=y,
+    s=80
+)
+
+plt.plot(X_proj[:,0], X_proj[:,1], alpha=0.4)
+
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("Bayesian Optimization Search Trajectory")
+
+plt.colorbar(sc,label="Measured Response")
+
+plt.show()
+
+
+
+Apparently a 2d way to see 10d optimisation according to chatgpt
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+
+# Example experiment matrix
+# rows = experiments
+# columns = media components
+X = np.random.rand(40, 6)
+
+# example response (growth, yield etc)
+y = np.sin(X[:,0]*5) + np.cos(X[:,1]*4)
+
+# project high dimensional space
+pca = PCA(n_components=2)
+X2 = pca.fit_transform(X)
+
+# create candidate points
+X_candidates = np.random.rand(2000,6)
+
+# project candidates
+Xc2 = pca.transform(X_candidates)
+
+# fake GP prediction (replace with real GP)
+y_pred = np.sin(X_candidates[:,0]*5) + np.cos(X_candidates[:,1]*4)
+
+fig, ax = plt.subplots(1,2, figsize=(12,5))
+
+# PANEL 1: experiment trajectory
+sc = ax[0].scatter(X2[:,0], X2[:,1], c=y, s=80)
+ax[0].plot(X2[:,0], X2[:,1], alpha=0.4)
+ax[0].set_title("Experiments")
+
+# PANEL 2: predicted landscape
+sc2 = ax[1].scatter(Xc2[:,0], Xc2[:,1], c=y_pred, s=3)
+ax[1].set_title("Model Prediction")
+
+plt.colorbar(sc2, ax=ax[1], label="Predicted Response")
+
+plt.show()
+
